@@ -1,18 +1,18 @@
-package com.example.accessingdatajpa.repository;
+package com.example.medical.respository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.accessingdatajpa.entity.Customer;
-import com.example.accessingdatajpa.entity.Product;
+import com.example.medical.entity.Record;
+
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface RecordRepository extends JpaRepository<Record, Long> {
 
-    // Method to find a user by username
-	Product findByName(String name);
+    // Method to find a record by name
+	Record findByName(String name);
 	
-	Product findById(long id);
+	Record findById(long id);
 
     // Other custom queries can be defined here if needed
 }
