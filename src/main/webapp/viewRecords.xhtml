@@ -50,6 +50,30 @@
                 `;
             });
         });
+		
+		// Function to handle record deletion via API
+		function deleteRecord(recordId, button) {
+			// Confirm before deletion
+			if (confirm("Are you sure you want to delete this record?")) {
+				// Send DELETE request to API
+				fetch(`http://localhost:8080/api/records/${recordId}`, {
+					method: 'DELETE',
+				})
+				.then(response => {
+					if (response.ok) {
+						// On success, remove the row from the table
+						const row = button.closest("tr");
+						row.remove();
+						alert('Record deleted successfully.');
+					} else {
+						alert('Failed to delete record.');
+					}
+				})
+				.catch(error => {
+					alert('Error deleting record: ' + error);
+				});
+			}
+		}
 </script>
 
 </body>
