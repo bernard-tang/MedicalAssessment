@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://jakarta.faces.html">
+<h:head>
+    <title>Patient Register</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:dataTable value="#{patientBean.patients}" var="p">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{p.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Age</f:facet>
+                #{p.age}
+            </h:column>
+            <h:column>
+                <f:facet name="header">History</f:facet>
+                #{p.medicalHistory}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>
