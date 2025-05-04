@@ -40,6 +40,7 @@ public class RecordController {
     }
 
     @GetMapping("")
+    // Get all Patient's Records   
     public ResponseEntity<List<Record>> getAll() {
     	List<Record> results = recordService.getAllRecords();
     	
@@ -47,6 +48,7 @@ public class RecordController {
     }
 
     @GetMapping("/{id}")
+    // Get specific Patient's Record by id 
     public ResponseEntity<Record> getById(@PathVariable Long id) {
     	Optional<Record> recordOpt = recordService.getRecordById(id);
         if (recordOpt.isPresent()) {
@@ -57,16 +59,19 @@ public class RecordController {
     }
 
     @PostMapping("")
+    // Create Patient's record   
     public ResponseEntity<Record> create(@RequestBody Record record) {
         return new ResponseEntity<Record>(recordService.createRecord(record), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    // Update Patient's record by id
     public ResponseEntity<Record> update(@PathVariable Long id, @RequestBody Record record) {
         return new ResponseEntity<Record>(recordService.updateRecord(id, record), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
+    // Delete Patient's record by id    
     public ResponseEntity<Record> delete(@PathVariable Long id) {
     	recordService.deleteRecord(id);
     	return new ResponseEntity<Record>(new Record(), HttpStatus.NO_CONTENT);

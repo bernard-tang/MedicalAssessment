@@ -29,7 +29,8 @@ public class MedicalApplication extends SpringBootServletInitializer{
 	public CommandLineRunner demo(RecordRepository repository) {
 		return (args) -> {	
 			// save a few customers
-			repository.save(new Record("asj", 22, List.of("Diabetes", "Asthma")));
+			repository.save(new Record("Peter", 22, List.of("Diabetes", "Asthma")));
+			repository.save(new Record("Alice", 20, List.of("Flu", "Asthma")));
 			
 
 			// fetch all customers
