@@ -22,18 +22,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/records")
+@RequestMapping("/api/records")
 @CrossOrigin(origins = "*")
 public class RecordController {
 
 	private static final Logger log = LoggerFactory.getLogger(RecordController.class);
 	
-	@Autowired
-    private RecordService recordService;
+	 private final RecordService recordService;
 
-    @GetMapping("/")
+    // Constructor Injection for RecordService
+    @Autowired
+    public RecordController(RecordService recordService) {
+        this.recordService = recordService;
+    }
+
+    @GetMapping("")
     public ResponseEntity<List<Record>> getAll() {
     	List<Record> results = recordService.getAllRecords();
     	
@@ -42,13 +48,17 @@ public class RecordController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Record> getById(@PathVariable Long id) {
-        return new ResponseEntity<Record>(recordService.getRecordById(id), HttpStatus.OK);
+    	Optional<Record> recordOpt = recordService.getRecordById(id);
+        if (recordOpt.isPresent()) {
+            return ResponseEntity.ok(recordOpt.get());
+        } else {
+            return ResponseEntity.notFound().build();  // Returning 404 without a body
+        }
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Record> create(@RequestBody Record record) {
-        
-        return new ResponseEntity<Record>(recordService.createRecord(record), HttpStatus.OK);
+        return new ResponseEntity<Record>(recordService.createRecord(record), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -59,6 +69,6 @@ public class RecordController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Record> delete(@PathVariable Long id) {
     	recordService.deleteRecord(id);
-    	return new ResponseEntity<Record>(new Record(), HttpStatus.OK);
+    	return new ResponseEntity<Record>(new Record(), HttpStatus.NO_CONTENT);
     }
 }

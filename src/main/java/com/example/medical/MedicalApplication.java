@@ -2,6 +2,7 @@ package com.example.medical;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,10 +41,10 @@ public class MedicalApplication extends SpringBootServletInitializer{
 			log.info("");
 
 			// fetch an individual customer by ID
-			Record record = repository.findById(1L);
+			Optional<Record> record = repository.findById(1L);
 			log.info("Customer found with findById(1L):");
 			log.info("--------------------------------");
-			log.info(record.toString());
+			log.info(record.get().getName());
 			log.info("");
 
 			

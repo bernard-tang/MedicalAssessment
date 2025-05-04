@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Medical Record</title>
+</head>
+<body>
+
+<h:form>
+    <h1>Add New Medical Record</h1>
+    <h:outputLabel for="name" value="Name: "/>
+    <h:inputText id="name" value="#{recordBean.name}" required="true"/>
+    <br/>
+    <h:outputLabel for="age" value="Age: "/>
+    <h:inputText id="age" value="#{recordBean.age}" required="true"/>
+    <br/>
+    <h:outputLabel for="medicalHistory" value="Medical History: "/>
+    <h:inputTextarea id="medicalHistory" value="#{recordBean.medicalHistory}" required="true"/>
+    <br/>
+    <p:commandButton value="Add Record" action="#{recordBean.addRecord}" update=":messages"/>
+</h:form>
+
+<script>
+    function addRecord() {
+        const record = {
+            name: document.querySelector('#name').value,
+            age: document.querySelector('#age').value,
+            medicalHistory: document.querySelector('#medicalHistory').value.split(',')
+        };
+
+        fetch('http://localhost:8080/api/records', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(record)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Record added successfully!');
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>

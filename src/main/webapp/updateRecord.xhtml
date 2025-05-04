@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Update Medical Record</title>
+</head>
+<body>
+
+<h:form>
+    <h1>Update Medical Record</h1>
+    <h:outputLabel for="id" value="Record ID: "/>
+    <h:inputText id="id" value="#{recordBean.id}" required="true"/>
+    <br/>
+    <h:outputLabel for="name" value="Name: "/>
+    <h:inputText id="name" value="#{recordBean.name}" required="true"/>
+    <br/>
+    <h:outputLabel for="age" value="Age: "/>
+    <h:inputText id="age" value="#{recordBean.age}" required="true"/>
+    <br/>
+    <h:outputLabel for="medicalHistory" value="Medical History: "/>
+    <h:inputTextarea id="medicalHistory" value="#{recordBean.medicalHistory}" required="true"/>
+    <br/>
+    <p:commandButton value="Update Record" action="#{recordBean.updateRecord}" update=":messages"/>
+</h:form>
+
+<script>
+    function updateRecord() {
+        const record = {
+            id: document.querySelector('#id').value,
+            name: document.querySelector('#name').value,
+            age: document.querySelector('#age').value,
+            medicalHistory: document.querySelector('#medicalHistory').value.split(',')
+        };
+
+        fetch('http://localhost:8080/api/records/' + record.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(record)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Record updated successfully!');
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>

@@ -58,6 +58,13 @@
 		</dependency>
 		
 		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.30</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 		    <groupId>javax.xml.bind</groupId>
 		    <artifactId>jaxb-api</artifactId>
 		    <version>2.3.0</version>
@@ -68,19 +75,7 @@
 		    <version>3.25.0-GA</version>
 		</dependency>
 		
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-config</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt</artifactId>
-		    <version>0.9.1</version>
-		</dependency>
+		
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId>
@@ -92,6 +87,64 @@
 		    <artifactId>commons-io</artifactId>
 		    <version>2.11.0</version>
 		</dependency>
+		
+		<!--<dependency>
+		    <groupId>jakarta.faces</groupId>
+		    <artifactId>jakarta.faces-api</artifactId>
+		    <version>3.0.0</version>  Use the latest version 
+		    <scope>provided</scope>
+		</dependency>-->
+		
+		<!--<dependency>
+		    <groupId>org.glassfish</groupId>
+		    <artifactId>jakarta.faces</artifactId>
+		    <version>4.0.1</version>  Use the latest version 
+		</dependency>-->
+		
+		<!--<dependency>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		    <version>13.0.0</version>  Use the latest version 
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.webflow</groupId>
+		    <artifactId>spring-faces</artifactId>
+		    <version>3.0.1</version>
+		</dependency>-->
+		
+		<!--thymeleaf-->
+		<!--<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>-->
+		
+		<dependency>
+		   <groupId>jakarta.platform</groupId>
+		   <artifactId>jakarta.jakartaee-web-api</artifactId>
+		   <version>11.0.0</version>
+		   <scope>provided</scope>
+		</dependency>
+		
+	    <dependency>
+	        <groupId>jakarta.faces</groupId>
+	        <artifactId>jakarta.faces-api</artifactId>
+	        <version>4.1.2</version>
+	        <scope>provided</scope>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.glassfish</groupId>
+	        <artifactId>jakarta.faces</artifactId>
+	        <version>4.1.3</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.primefaces</groupId>
+	        <artifactId>primefaces</artifactId>
+	        <version>15.0.3</version>
+	    </dependency>
+		
 		
 	</dependencies>
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View Medical Records</title>
+    <h:outputStylesheet name="styles.css"/>
+</head>
+<body>
+
+<h:form>
+    <h1>Medical Records List</h1>
+    <p:dataTable var="record" value="#{recordsBean.records}" id="recordsTable" paginator="true" rows="5">
+        <p:column headerText="ID">
+            <h:outputText value="#{record.id}"/>
+        </p:column>
+        <p:column headerText="Name">
+            <h:outputText value="#{record.name}"/>
+        </p:column>
+        <p:column headerText="Age">
+            <h:outputText value="#{record.age}"/>
+        </p:column>
+        <p:column headerText="Medical History">
+            <h:outputText value="#{record.medicalHistory}"/>
+        </p:column>
+        <p:column>
+            <p:commandButton value="Delete" action="#{recordsBean.deleteRecord(record.id)}" update="recordsTable"/>
+        </p:column>
+    </p:dataTable>
+</h:form>
+
+<script>
+    // Use JavaScript to fetch records via REST API
+    fetch('http://localhost:8080/api/records')  // Replace with your actual REST endpoint
+        .then(response => response.json())
+        .then(data => {
+            // Populate records in JSF managed bean
+            // This is just a mock, in real life you would bind it to a bean
+            let recordsTable = document.querySelector("#recordsTable tbody");
+            data.forEach(record => {
+                let row = recordsTable.insertRow();
+                row.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.name}</td>
+                    <td>${record.age}</td>
+                    <td>${record.medicalHistory}</td>
+                    <td><button onclick="deleteRecord(${record.id})">Delete</button></td>
+                `;
+            });
+        });
+</script>
+
+</body>
+</html>
