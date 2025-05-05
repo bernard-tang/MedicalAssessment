@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-<head>
-    <meta charset="UTF-8"/>
+      xmlns:faces="jakarta.faces"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:pt="jakarta.faces.passthrough"
+      xmlns:cc="jakarta.faces.composite"
+      xmlns:c="jakarta.tags.core"
+      xmlns:p="primefaces"
+      xmlns:fn="jakarta.tags.functions">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
     <title>View Medical Records</title>
-    <h:outputStylesheet name="styles.css"/>
-</head>
-<body>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+    <h:outputStylesheet library="assets" name="css/layout.css"/>
+</h:head>
+<h:body>
 
 <h:form>
     <h1>Medical Records List</h1>
@@ -76,5 +84,5 @@
 		}
 </script>
 
-</body>
+</h:body>
 </html>
