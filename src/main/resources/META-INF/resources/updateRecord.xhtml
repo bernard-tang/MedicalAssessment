@@ -11,44 +11,21 @@
 
 <h:form>
     <h1>Update Medical Record</h1>
-    <h:outputLabel for="id" value="Record ID: "/>
-    <h:inputText id="id" value="#{recordBean.id}" required="true"/>
-    <br/>
-    <h:outputLabel for="name" value="Name: "/>
-    <h:inputText id="name" value="#{recordBean.name}" required="true"/>
-    <br/>
-    <h:outputLabel for="age" value="Age: "/>
-    <h:inputText id="age" value="#{recordBean.age}" required="true"/>
-    <br/>
-    <h:outputLabel for="medicalHistory" value="Medical History: "/>
-    <h:inputTextarea id="medicalHistory" value="#{recordBean.medicalHistory}" required="true"/>
-    <br/>
-    <p:commandButton value="Update Record" action="#{recordBean.updateRecord}" update=":messages"/>
+    <!-- Hidden field to store the record ID (optional, for debugging) -->
+    <h:outputLabel for="recordId" value="Record ID" />
+    <h:inputText id="recordId" value="#{patientBean.record.id}" readonly="true" />
+    
+    <h:outputLabel for="name" value="Name:" />
+    <h:inputText id="name" value="#{patientBean.record.name}" required="true" />
+    
+    <h:outputLabel for="age" value="Age:" />
+    <h:inputText id="age" value="#{patientBean.record.age}" required="true" />
+    
+    <!-- <h:outputLabel for="medicalHistory" value="Medical History:" />
+    <h:inputText id="medicalHistory" value="#{patientBean.record.medicalHistory}" /> -->
+    
+    <h:commandButton value="Update Record" action="#{patientBean.updateRecord(patientBean.record.id)}" />
 </h:form>
-
-<script>
-    function updateRecord() {
-        const record = {
-            id: document.querySelector('#id').value,
-            name: document.querySelector('#name').value,
-            age: document.querySelector('#age').value,
-            medicalHistory: document.querySelector('#medicalHistory').value.split(',')
-        };
-
-        fetch('http://localhost:8080/api/records/' + record.id, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(record)
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('Record updated successfully!');
-        })
-        .catch(error => console.error('Error:', error));
-    }
-</script>
 
 </body>
 </html>
