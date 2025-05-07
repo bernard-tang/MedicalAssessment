@@ -20,69 +20,41 @@
 
 <h:form>
     <h1>Medical Records List</h1>
-    <p:dataTable var="record" value="#{recordsBean.records}" id="recordsTable" paginator="true" rows="5">
-        <p:column headerText="ID">
-            <h:outputText value="#{record.id}"/>
-        </p:column>
-        <p:column headerText="Name">
-            <h:outputText value="#{record.name}"/>
-        </p:column>
-        <p:column headerText="Age">
-            <h:outputText value="#{record.age}"/>
-        </p:column>
-        <p:column headerText="Medical History">
-            <h:outputText value="#{record.medicalHistory}"/>
-        </p:column>
-        <p:column>
-            <p:commandButton value="Delete" action="#{recordsBean.deleteRecord(record.id)}" update="recordsTable"/>
-        </p:column>
-    </p:dataTable>
-</h:form>
+    <div class="layout-wrapper">
+        <div class="layout-content layout-content-inner">
+            <div class="m-4 crud-demo">
 
-<script>
-    // Use JavaScript to fetch records via REST API
-    fetch('http://localhost:8080/api/records')  // Replace with your actual REST endpoint
-        .then(response => response.json())
-        .then(data => {
-            // Populate records in JSF managed bean
-            // This is just a mock, in real life you would bind it to a bean
-            let recordsTable = document.querySelector("#recordsTable tbody");
-            data.forEach(record => {
-                let row = recordsTable.insertRow();
-                row.innerHTML = `
-                    <td>${record.id}</td>
-                    <td>${record.name}</td>
-                    <td>${record.age}</td>
-                    <td>${record.medicalHistory}</td>
-                    <td><button onclick="deleteRecord(${record.id})">Delete</button></td>
-                `;
-            });
-        });
-		
-		// Function to handle record deletion via API
-		function deleteRecord(recordId, button) {
-			// Confirm before deletion
-			if (confirm("Are you sure you want to delete this record?")) {
-				// Send DELETE request to API
-				fetch(`http://localhost:8080/api/records/${recordId}`, {
-					method: 'DELETE',
-				})
-				.then(response => {
-					if (response.ok) {
-						// On success, remove the row from the table
-						const row = button.closest("tr");
-						row.remove();
-						alert('Record deleted successfully.');
-					} else {
-						alert('Failed to delete record.');
-					}
-				})
-				.catch(error => {
-					alert('Error deleting record: ' + error);
-				});
-			}
-		}
-</script>
+                <div class="flex justify-content-center flex-wrap">
+                    <h1 class="flex align-items-center justify-content-center font-bold">
+                        CRUD SPRING BOOT JSF
+                    </h1>
+                </div>
+
+                <h:dataTable value="#{patientBean.records}" var="r">
+			        <h:column>
+			            <f:facet name="header">ID</f:facet>
+			            #{r.id}
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">Name</f:facet>
+			            #{r.name}
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">Age</f:facet>
+			            #{r.age}
+			        </h:column>
+			        <h:column>
+			            <f:facet name="header">Actions</f:facet>
+			            <h:commandLink value="Edit" action="#{patientBean.editRecord(r.id)}" />
+			            <h:commandLink value="Delete" action="#{patientBean.deleteRecord(r.id)}" />
+			        </h:column>
+			    </h:dataTable>
+			    <h:commandButton value="Create New Record" action="addRecord.xhtml" />
+
+            </div>
+        </div>
+    </div>
+</h:form>
 
 </h:body>
 </html>
