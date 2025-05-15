@@ -1,6 +1,7 @@
 package com.example.medical.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +37,14 @@ public class RecordServiceImpl implements RecordService {
 	}
 
 	@Override
+	@Transactional
 	public Record createRecord(Record record) {
 		// create new record
 		return recordRepository.save(record);
 	}
 
 	@Override
+	@Transactional
 	public Record updateRecord(Long id, Record updatedRecord) {
 		// update record if id is found
 		
@@ -54,6 +57,7 @@ public class RecordServiceImpl implements RecordService {
     }
 
 	@Override
+	@Transactional
 	public void deleteRecord(long id) {
 		// delete record by id
 		recordRepository.deleteById(id);
