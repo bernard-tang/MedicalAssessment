@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import com.fasterxml.jackson.annotation.*;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,9 +24,14 @@ import lombok.RequiredArgsConstructor;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Record {
+public class Record implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
